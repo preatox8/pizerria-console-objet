@@ -1,4 +1,4 @@
-package fr.pizza.model;
+package fr.pizzeria.model;
 
 /**
  * @author ETY2
@@ -14,6 +14,7 @@ public class Pizza {
 	private String code;
 	private String nom;
 	private double prix;
+	
 	
 	
 	/** Constructeur: l'id est généré avec un compteur

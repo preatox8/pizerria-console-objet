@@ -1,4 +1,4 @@
-package fr.pizzeria.console;
+package fr.pizzeria.ihm;
 
 /**
  * @author ETY2
@@ -7,7 +7,6 @@ package fr.pizzeria.console;
 abstract public class OptionMenu{
 	
 	protected String libelle;
-
 
 	/**
 	 * @return

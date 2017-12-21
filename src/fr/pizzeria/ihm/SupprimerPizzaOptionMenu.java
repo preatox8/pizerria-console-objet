@@ -1,17 +1,19 @@
-package fr.pizzeria.console;
+package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import fr.pizza.model.Pizza;
+import fr.pizzeria.dao.PizzaDaolmpl;
+import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu{
 
 	private Scanner scanner;
-	private Pizza[] pizzas;
+	private PizzaDaolmpl dao;
 
-	public SupprimerPizzaOptionMenu(Scanner scanner, Pizza[] pizzas) {
+
+	public SupprimerPizzaOptionMenu(Scanner scanner, PizzaDaolmpl dao) {
 		this.scanner = scanner;
-		this.pizzas = pizzas;
+		this.dao = dao;
 	}
 	
 	@Override
@@ -22,6 +24,8 @@ public class SupprimerPizzaOptionMenu extends OptionMenu{
 
 	public void execute(){
 		
+		Pizza[] pizzas = dao.findAllPizzas();
+		
 		for(int i = 0; i<pizzas.length; i++){
 			if(pizzas[i] != null) {
 				System.out.println(pizzas[i].getCode() + " -> " + pizzas[i].getNom() + " (" + pizzas[i].getPrix() + ")");
@@ -30,15 +34,9 @@ public class SupprimerPizzaOptionMenu extends OptionMenu{
 		
 		System.out.println("");
 		System.out.println("Veuillez choisir la pizza à supprimer");
-		String supprpizza = scanner.next();
+		String code = scanner.next();
+		dao.deletePizza(code);
 		
-		for(int i = 0; i<pizzas.length; i++){
-			if(pizzas[i] != null) {
-				if(pizzas[i].getCode().equals(supprpizza)) {
-					pizzas[i]=null;
-				}
-			}
-		}	
 	}
 
 }
