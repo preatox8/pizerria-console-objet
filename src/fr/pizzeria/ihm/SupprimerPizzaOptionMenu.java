@@ -1,8 +1,11 @@
 package fr.pizzeria.ihm;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaolmpl;
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu{
@@ -22,7 +25,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu{
 		return "4 - Supprimer une pizza";
 	}
 
-	public void execute(){
+	public void execute() throws DeletePizzaException{
 		
 		Pizza[] pizzas = dao.findAllPizzas();
 		
@@ -35,7 +38,11 @@ public class SupprimerPizzaOptionMenu extends OptionMenu{
 		System.out.println("");
 		System.out.println("Veuillez choisir la pizza à supprimer");
 		String code = scanner.next();
-		dao.deletePizza(code);
+		if(!dao.pizzaExist(code)) {
+			throw new DeletePizzaException("le code n'existe pas");
+		}else {
+			dao.deletePizza(code);
+		}
 		
 	}
 

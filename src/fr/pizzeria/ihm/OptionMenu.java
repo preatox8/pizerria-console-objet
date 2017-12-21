@@ -1,5 +1,7 @@
 package fr.pizzeria.ihm;
 
+import fr.pizzeria.exception.SavePizzaException;
+
 /**
  * @author ETY2
  *
@@ -22,6 +24,6 @@ abstract public class OptionMenu{
 		this.libelle = libelle;
 	}
 	
-	public abstract void execute();
+	public abstract void execute() throws Exception;
 
 }

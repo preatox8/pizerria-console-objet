@@ -1,15 +1,17 @@
 package fr.pizzeria.ihm;
 
+import java.text.Format;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaolmpl;
+import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.Pizza;
 
-public class AjouterPizzaOptionMenu extends OptionMenu{
+public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	private Scanner scanner;
 	private PizzaDaolmpl dao;
-
 
 	public AjouterPizzaOptionMenu(Scanner scanner, PizzaDaolmpl dao) {
 		this.scanner = scanner;
@@ -22,27 +24,37 @@ public class AjouterPizzaOptionMenu extends OptionMenu{
 		return "2 - Ajouter les pizzas";
 	}
 
-	public void execute(){
+	public void execute() throws SavePizzaException{
 		
 		Pizza[] pizzas = dao.findAllPizzas();
-		
-		for(int i = 0; i<pizzas.length; i++){
-			if(pizzas[i] != null) {
+
+		for (int i = 0; i < pizzas.length; i++) {
+			if (pizzas[i] != null) {
 				System.out.println(pizzas[i].getCode() + " -> " + pizzas[i].getNom() + " (" + pizzas[i].getPrix() + ")");
 			}
 		}
+
 		
-		System.out.println("Veuillez saisir le code");
-		String codepizza = scanner.next();
-		System.out.println("Veuillez saisir le nom (sans espace)");
-		String nompizza = scanner.next();
-		System.out.println("Veuillez saisir le prix");
-		Double prixpizza = scanner.nextDouble();
-		System.out.println("");
-		Pizza pizza = new Pizza(codepizza, nompizza, prixpizza);
-		dao.saveNewPizza(pizza);
-		
+			System.out.println("Veuillez saisir le code");
+			String codepizza = scanner.next();
+			if (codepizza.length() > 3 ) {
+				throw new SavePizzaException("Le code doit etre constituer de 3 lettres ou moins.");
+			}
+			System.out.println("Veuillez saisir le nom (sans espace)");
+			String nompizza = scanner.next();
+			System.out.println("Veuillez saisir le prix");
+			String strprixpizza = scanner.next();
+			Double prixpizza = Double.parseDouble(strprixpizza);
+			if (prixpizza<=0 && prixpizza != null && prixpizza instanceof Double) {
+				throw new SavePizzaException("Le prix doit être strictement positif.");
+			}
+			System.out.println("");
+			Pizza pizza = new Pizza(codepizza, nompizza, prixpizza);
+			if(codepizza instanceof String && nompizza instanceof String && prixpizza instanceof Double) {
+				
+					dao.saveNewPizza(pizza);
+			}
+	
 	}
 
-	
 }
