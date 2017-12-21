@@ -6,6 +6,7 @@ import fr.pizzeria.model.Pizza;
 import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
@@ -57,10 +58,10 @@ public class PizzeriaAdminConsoleApp {
 						break;
 					}
 				}else {
-					throw new SavePizzaException("veuillez choisir une des options proposés");
+					throw new StockageException("veuillez choisir une des options proposés");
 				}
 				
-			} catch (SavePizzaException | UpdatePizzaException | DeletePizzaException e) {
+			} catch (StockageException e) {
 				System.out.println(e.getMessage());
 			}
 			catch (NumberFormatException e) {

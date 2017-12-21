@@ -1,10 +1,12 @@
 package fr.pizzeria.ihm;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
@@ -24,34 +26,29 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		return "3 - Mettre à jour une pizza";
 	}
 
-	public void execute() throws UpdatePizzaException {
+	public void execute() throws StockageException {
 
-		Pizza[] pizzas = dao.findAllPizzas();
-
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] != null) {
-				System.out
-						.println(pizzas[i].getCode() + " -> " + pizzas[i].getNom() + " (" + pizzas[i].getPrix() + ")");
+			List<Pizza> pizzas = dao.findAllPizzas();
+			
+			for(Pizza pizza : pizzas) {
+				System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ")");
 			}
-		}
 
 		
 			System.out.println("");
 			System.out.println("Veuillez choisir la pizza à modifier");
 			String modifpizza = scanner.next();
 			if(dao.pizzaExist(modifpizza) == false) {
-				throw new UpdatePizzaException("code inccorrect");
+				throw new StockageException("code inccorrect");
 			}
-			for (int i = 0; i < pizzas.length; i++) {
-				if (pizzas[i] != null) {
+			for(Pizza pizza : pizzas) {
+				
 					
-					
-					
-					if (pizzas[i].getCode().equals(modifpizza)) {
+					if (pizza.getCode().equals(modifpizza)) {
 						System.out.println("Veuillez saisir le code");
 						String modifcodepizza = scanner.next();
 						if (modifcodepizza.length() > 3 ) {
-							throw new UpdatePizzaException("Le code doit etre constituer de 3 lettres ou moins.");
+							throw new StockageException("Le code doit etre constituer de 3 lettres ou moins.");
 						}
 						System.out.println("Veuillez saisir le nom (sans espace)");
 						String modifnompizza = scanner.next();
@@ -59,7 +56,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 						String strmodifprixpizza = scanner.next();
 						Double modifprixpizza =  Double.parseDouble(strmodifprixpizza);
 						if (modifprixpizza<=0 && modifprixpizza != null && modifprixpizza instanceof Double) {
-							throw new UpdatePizzaException("Le prix doit être strictement positif.");
+							throw new StockageException("Le prix doit être strictement positif.");
 						}
 						Pizza p = new Pizza(modifcodepizza, modifnompizza, modifprixpizza);
 						if(modifcodepizza instanceof String && modifnompizza instanceof String && modifprixpizza instanceof Double) {
@@ -68,7 +65,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 					}
 					}
 				
-				}
+				
 			}
 
 	}

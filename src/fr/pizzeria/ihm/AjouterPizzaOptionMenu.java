@@ -2,10 +2,12 @@ package fr.pizzeria.ihm;
 
 import java.text.Format;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
@@ -24,21 +26,18 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		return "2 - Ajouter les pizzas";
 	}
 
-	public void execute() throws SavePizzaException{
+	public void execute() throws StockageException{
 		
-		Pizza[] pizzas = dao.findAllPizzas();
-
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] != null) {
-				System.out.println(pizzas[i].getCode() + " -> " + pizzas[i].getNom() + " (" + pizzas[i].getPrix() + ")");
+			List<Pizza> pizzas = dao.findAllPizzas();
+	
+			for(Pizza pizza : pizzas) {
+				System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ")");
 			}
-		}
-
 		
 			System.out.println("Veuillez saisir le code");
 			String codepizza = scanner.next();
 			if (codepizza.length() > 3 ) {
-				throw new SavePizzaException("Le code doit etre constituer de 3 lettres ou moins.");
+				throw new StockageException("Le code doit etre constituer de 3 lettres ou moins.");
 			}
 			System.out.println("Veuillez saisir le nom (sans espace)");
 			String nompizza = scanner.next();
@@ -46,13 +45,12 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 			String strprixpizza = scanner.next();
 			Double prixpizza = Double.parseDouble(strprixpizza);
 			if (prixpizza<=0 && prixpizza != null && prixpizza instanceof Double) {
-				throw new SavePizzaException("Le prix doit être strictement positif.");
+				throw new StockageException("Le prix doit être strictement positif.");
 			}
 			System.out.println("");
 			Pizza pizza = new Pizza(codepizza, nompizza, prixpizza);
 			if(codepizza instanceof String && nompizza instanceof String && prixpizza instanceof Double) {
-				
-					dao.saveNewPizza(pizza);
+				dao.saveNewPizza(pizza);
 			}
 	
 	}
