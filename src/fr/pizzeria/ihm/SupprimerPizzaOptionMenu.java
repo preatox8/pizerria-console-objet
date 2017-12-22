@@ -32,7 +32,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu{
 		List<Pizza> pizzas = dao.findAllPizzas();
 		
 		for(Pizza pizza : pizzas) {
-			System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ")");
+			System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
 		}
 		
 		System.out.println("");

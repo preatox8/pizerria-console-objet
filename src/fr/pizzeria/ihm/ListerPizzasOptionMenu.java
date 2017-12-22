@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaolmpl;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasOptionMenu extends OptionMenu{
@@ -27,7 +28,7 @@ public class ListerPizzasOptionMenu extends OptionMenu{
 		List<Pizza> pizzas = dao.findAllPizzas();
 		
 		for(Pizza pizza : pizzas) {
-			System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ")");
+			System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
 		}
 	}	
 }

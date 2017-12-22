@@ -8,6 +8,7 @@ import java.util.Scanner;
 import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
@@ -31,7 +32,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 			List<Pizza> pizzas = dao.findAllPizzas();
 	
 			for(Pizza pizza : pizzas) {
-				System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ")");
+				System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
 			}
 		
 			System.out.println("Veuillez saisir le code");
@@ -47,8 +48,13 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 			if (prixpizza<=0 && prixpizza != null && prixpizza instanceof Double) {
 				throw new StockageException("Le prix doit être strictement positif.");
 			}
+			System.out.println("Veuillez saisir la catégorie de la pizza");
+			System.out.println("1 - VIANDE");
+			System.out.println("2 - POISSON");
+			System.out.println("3 - SANS_VIANDE");
+			Integer categoriepizza = scanner.nextInt();
 			System.out.println("");
-			Pizza pizza = new Pizza(codepizza, nompizza, prixpizza);
+			Pizza pizza = new Pizza(codepizza, nompizza, prixpizza, CategoriePizza.getCategorie(categoriepizza));
 			if(codepizza instanceof String && nompizza instanceof String && prixpizza instanceof Double) {
 				dao.saveNewPizza(pizza);
 			}

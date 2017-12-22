@@ -8,6 +8,7 @@ import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
@@ -31,7 +32,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			List<Pizza> pizzas = dao.findAllPizzas();
 			
 			for(Pizza pizza : pizzas) {
-				System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ")");
+				System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
 			}
 
 		
@@ -58,7 +59,12 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 						if (modifprixpizza<=0 && modifprixpizza != null && modifprixpizza instanceof Double) {
 							throw new StockageException("Le prix doit être strictement positif.");
 						}
-						Pizza p = new Pizza(modifcodepizza, modifnompizza, modifprixpizza);
+						System.out.println("Veuillez saisir la catégorie de la pizza");
+						System.out.println("1 - VIANDE");
+						System.out.println("2 - POISSON");
+						System.out.println("3 - SANS_VIANDE");
+						Integer categoriepizza = scanner.nextInt();
+						Pizza p = new Pizza(modifcodepizza, modifnompizza, modifprixpizza, CategoriePizza.getCategorie(categoriepizza));
 						if(modifcodepizza instanceof String && modifnompizza instanceof String && modifprixpizza instanceof Double) {
 							
 							dao.updatePizza(modifpizza, p);

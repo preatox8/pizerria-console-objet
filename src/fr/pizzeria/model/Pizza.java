@@ -14,20 +14,29 @@ public class Pizza {
 	private String code;
 	private String nom;
 	private double prix;
+	private CategoriePizza categoriepizza;
 	
+	public static int compteur = 0;
 	
+	public Pizza() {
+		
+	}
 	
-	/** Constructeur: l'id est généré avec un compteur
-	 * @param code code
-	 * @param nom nom
-	 * @param prix prix
+	/**
+	 * @param id
+	 * @param code
+	 * @param nom
+	 * @param prix
 	 */
-	public Pizza(String code, String nom, double prix) {
-		this.id = 0;
+	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
+		super();
+		this.id = compteur++;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+		this.categoriepizza = categorie;
 	}
+	
 	/**
 	 * @return
 	 */
@@ -75,6 +84,19 @@ public class Pizza {
 	 */
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+	
+	public String toString(CategoriePizza categoriePizza) {
+		String cat =  categoriePizza.getCategorie();
+		return cat;
+	}
+
+	public CategoriePizza getCategoriepizza() {
+		return categoriepizza;
+	}
+
+	public void setCategoriepizza(CategoriePizza categoriepizza) {
+		this.categoriepizza = categoriepizza;
 	}
 	
 	
