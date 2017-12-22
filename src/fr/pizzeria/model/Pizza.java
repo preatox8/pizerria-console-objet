@@ -4,10 +4,6 @@ package fr.pizzeria.model;
  * @author ETY2
  *
  */
-/**
- * @author ETY2
- *
- */
 public class Pizza {
 	
 	private int id;
@@ -23,10 +19,10 @@ public class Pizza {
 	}
 	
 	/**
-	 * @param id
 	 * @param code
 	 * @param nom
 	 * @param prix
+	 * @param categorie
 	 */
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		super();
@@ -86,15 +82,25 @@ public class Pizza {
 		this.prix = prix;
 	}
 	
+	/**
+	 * @param categoriePizza
+	 * @return
+	 */
 	public String toString(CategoriePizza categoriePizza) {
 		String cat =  categoriePizza.getCategorie();
 		return cat;
 	}
 
+	/**
+	 * @return
+	 */
 	public CategoriePizza getCategoriepizza() {
 		return categoriepizza;
 	}
 
+	/**
+	 * @param categoriepizza
+	 */
 	public void setCategoriepizza(CategoriePizza categoriepizza) {
 		this.categoriepizza = categoriepizza;
 	}

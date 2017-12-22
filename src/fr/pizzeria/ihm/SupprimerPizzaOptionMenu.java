@@ -10,17 +10,28 @@ import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
+/**
+ * @author ETY2
+ *
+ */
 public class SupprimerPizzaOptionMenu extends OptionMenu{
 
 	private Scanner scanner;
 	private PizzaDaolmpl dao;
 
 
+	/**
+	 * @param scanner
+	 * @param dao
+	 */
 	public SupprimerPizzaOptionMenu(Scanner scanner, PizzaDaolmpl dao) {
 		this.scanner = scanner;
 		this.dao = dao;
 	}
 	
+	/* (non-Javadoc)
+	 * @see fr.pizzeria.ihm.OptionMenu#getLibelle()
+	 */
 	@Override
 	public String getLibelle() {
 		// TODO Auto-generated method stub
