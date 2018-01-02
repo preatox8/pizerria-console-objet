@@ -4,6 +4,11 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
+import fr.pizzeria.console.PizzeriaAdminConsoleApp;
 import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.StockageException;
@@ -18,6 +23,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu{
 
 	private Scanner scanner;
 	private PizzaDaolmpl dao;
+
 
 
 	/**
@@ -43,11 +49,11 @@ public class SupprimerPizzaOptionMenu extends OptionMenu{
 		List<Pizza> pizzas = dao.findAllPizzas();
 		
 		for(Pizza pizza : pizzas) {
-			System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
+			LOG.info(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
 		}
 		
-		System.out.println("");
-		System.out.println("Veuillez choisir la pizza à supprimer");
+		LOG.info("");
+		LOG.info("Veuillez choisir la pizza à supprimer");
 		String code = scanner.next();
 		if(!dao.pizzaExist(code)) {
 			throw new StockageException("le code n'existe pas");

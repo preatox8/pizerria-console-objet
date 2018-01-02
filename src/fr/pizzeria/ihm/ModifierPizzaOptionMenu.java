@@ -4,6 +4,11 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
+import fr.pizzeria.console.PizzeriaAdminConsoleApp;
 import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
@@ -32,12 +37,12 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			List<Pizza> pizzas = dao.findAllPizzas();
 			
 			for(Pizza pizza : pizzas) {
-				System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
+				LOG.info(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
 			}
 
 		
-			System.out.println("");
-			System.out.println("Veuillez choisir la pizza à modifier");
+			LOG.info("");
+			LOG.info("Veuillez choisir la pizza à modifier");
 			String modifpizza = scanner.next();
 			if(dao.pizzaExist(modifpizza) == false) {
 				throw new StockageException("code inccorrect");
@@ -46,23 +51,23 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				
 					
 					if (pizza.getCode().equals(modifpizza)) {
-						System.out.println("Veuillez saisir le code");
+						LOG.info("Veuillez saisir le code");
 						String modifcodepizza = scanner.next();
 						if (modifcodepizza.length() > 3 ) {
 							throw new StockageException("Le code doit etre constituer de 3 lettres ou moins.");
 						}
-						System.out.println("Veuillez saisir le nom (sans espace)");
+						LOG.info("Veuillez saisir le nom (sans espace)");
 						String modifnompizza = scanner.next();
-						System.out.println("Veuillez saisir le prix");
+						LOG.info("Veuillez saisir le prix");
 						String strmodifprixpizza = scanner.next();
 						Double modifprixpizza =  Double.parseDouble(strmodifprixpizza);
 						if (modifprixpizza<=0 && modifprixpizza != null && modifprixpizza instanceof Double) {
 							throw new StockageException("Le prix doit être strictement positif.");
 						}
-						System.out.println("Veuillez saisir la catégorie de la pizza");
-						System.out.println("1 - VIANDE");
-						System.out.println("2 - POISSON");
-						System.out.println("3 - SANS_VIANDE");
+						LOG.info("Veuillez saisir la catégorie de la pizza");
+						LOG.info("1 - VIANDE");
+						LOG.info("2 - POISSON");
+						LOG.info("3 - SANS_VIANDE");
 						Integer categoriepizza = scanner.nextInt();
 						Pizza p = new Pizza(modifcodepizza, modifnompizza, modifprixpizza, CategoriePizza.getCategorie(categoriepizza));
 						if(modifcodepizza instanceof String && modifnompizza instanceof String && modifprixpizza instanceof Double) {

@@ -3,6 +3,11 @@ package fr.pizzeria.ihm;
 import java.util.List;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
+import fr.pizzeria.console.PizzeriaAdminConsoleApp;
 import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
@@ -11,6 +16,7 @@ public class ListerPizzasOptionMenu extends OptionMenu{
 	
 	private Scanner scanner;
 	private PizzaDaolmpl dao;
+
 
 	public ListerPizzasOptionMenu(Scanner scanner, PizzaDaolmpl dao) {
 		this.scanner = scanner;
@@ -28,7 +34,7 @@ public class ListerPizzasOptionMenu extends OptionMenu{
 		List<Pizza> pizzas = dao.findAllPizzas();
 		
 		for(Pizza pizza : pizzas) {
-			System.out.println(pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza());
+			LOG.info((pizza.getCode() + " -> "+ pizza.getNom() + " "+ "(" + pizza.getPrix() + ") " + pizza.getCategoriepizza()));
 		}
 	}	
 }
