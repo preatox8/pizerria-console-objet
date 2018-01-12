@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.dao.PizzaDaolmpl;
+import fr.pizzeria.dao.Pizzajdbc;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
@@ -25,7 +26,7 @@ public class PizzeriaAdminConsoleApp {
 
 		Scanner scanner = new Scanner(System.in);
 
-		PizzaDaolmpl dao = new PizzaDaolmpl();
+		Pizzajdbc dao = new Pizzajdbc();
 		ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(scanner, dao);
 		AjouterPizzaOptionMenu ajouter = new AjouterPizzaOptionMenu(scanner, dao);
 		ModifierPizzaOptionMenu modifier = new ModifierPizzaOptionMenu(scanner, dao);

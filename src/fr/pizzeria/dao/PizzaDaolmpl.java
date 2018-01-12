@@ -41,16 +41,16 @@ public class PizzaDaolmpl implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String modifpizza, Pizza p) throws StockageException {
-		
+
 		for (Pizza pizza : listpizza) {
 			if (pizza.getCode().equals(modifpizza)) {
 				pizza.setCode(p.getCode());
-				pizza.setNom(p.getNom()); 
+				pizza.setNom(p.getNom());
 				pizza.setPrix(p.getPrix());
 				pizza.setCategoriepizza(p.getCategoriepizza());
 			}
 		}
-		
+
 	}
 
 	@Override

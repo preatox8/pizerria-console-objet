@@ -14,13 +14,14 @@ public enum CategoriePizza {
 	private String categorie;
 
 	/**
-	 * @param cat
+	 * @param categoriepizza
 	 * @return
 	 */
-	public static CategoriePizza getCategorie(int cat) {
-		if (cat == 1) {
+	public static CategoriePizza getCategorie(String categoriepizza) {
+
+		if (categoriepizza.equals("1")) {
 			return CategoriePizza.VIANDE;
-		} else if (cat == 2) {
+		} else if (categoriepizza.equals("2")) {
 			return CategoriePizza.POISSON;
 		} else {
 			return CategoriePizza.SANS_VIANDE;

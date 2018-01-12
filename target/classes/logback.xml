@@ -25,7 +25,7 @@
 	</logger>
 
 	<!-- règle de logs par défaut. Ici : niveau INFO vers la sortie standard -->
-	<root level="DEBUG">
+	<root level="INFO">
 		<appender-ref ref="FILE" />
 	</root>
 </configuration>
