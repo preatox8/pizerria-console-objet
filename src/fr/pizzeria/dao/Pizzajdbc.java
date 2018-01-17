@@ -129,10 +129,6 @@ public class Pizzajdbc implements IPizzaDao {
 
 			LOG.info("pizza inséré");
 
-			resultat.close();
-			statement.close();
-			myConnection.close();
-
 			/**
 			 * Traitement des messages d'erreurs selon leurs types
 			 */
@@ -169,10 +165,6 @@ public class Pizzajdbc implements IPizzaDao {
 
 			LOG.info("pizza modifié");
 
-			resultat.close();
-			statement.close();
-			myConnection.close();
-
 			/**
 			 * Traitement des messages d'erreurs selon leurs types
 			 */
@@ -203,7 +195,6 @@ public class Pizzajdbc implements IPizzaDao {
 			resultat.executeUpdate();
 
 			LOG.info("pizza supprimé");
-
 
 			/**
 			 * Traitement des messages d'erreurs selon leurs types
