@@ -24,7 +24,7 @@ import fr.pizzeria.model.Pizza;
 
 public class Pizzajdbc implements IPizzaDao {
 
-	public static Logger LOG = (Logger) LoggerFactory.getLogger(Pizzajdbc.class);
+	public static final Logger LOG = (Logger) LoggerFactory.getLogger(Pizzajdbc.class);
 
 	ResourceBundle properties = ResourceBundle.getBundle("jdbc");
 	String drivername = properties.getString("DriverName");
@@ -79,7 +79,7 @@ public class Pizzajdbc implements IPizzaDao {
 		} catch (SQLException e) {
 			throw new StockageException("Une erreur d'accès s'est produite : " + e.getMessage());
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			LOG.info("erreur : ",e.getMessage());
 		} finally {
 
 			if (resultat != null) {
@@ -138,7 +138,7 @@ public class Pizzajdbc implements IPizzaDao {
 
 		catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.info("erreur : ",e.getMessage());
 
 		}
 
@@ -173,8 +173,7 @@ public class Pizzajdbc implements IPizzaDao {
 		}
 
 		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.info("erreur : ",e.getMessage());
 
 		}
 
@@ -204,8 +203,7 @@ public class Pizzajdbc implements IPizzaDao {
 		}
 
 		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.info("erreur : ",e.getMessage());
 		}
 	}
 
