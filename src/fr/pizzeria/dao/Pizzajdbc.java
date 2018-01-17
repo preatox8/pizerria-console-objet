@@ -154,14 +154,12 @@ public class Pizzajdbc implements IPizzaDao {
 	@Override
 	public void updatePizza(String modifpizza, Pizza p) throws StockageException {
 
-		try {
+		try (Connection	myConnection = DriverManager.getConnection(url, login, password);
+				Statement statement = myConnection.createStatement();
+				PreparedStatement resultat = myConnection.prepareStatement(
+						"UPDATE Pizzas SET code_pizzas=?, nom_pizzas=?, prix_pizzas=?, categorie_pizzas=? WHERE code_pizzas=?");){
+			
 			Class.forName(drivername);
-			Connection myConnection;
-
-			myConnection = DriverManager.getConnection(url, login, password);
-			Statement statement = myConnection.createStatement();
-			PreparedStatement resultat = myConnection.prepareStatement(
-					"UPDATE Pizzas SET code_pizzas=?, nom_pizzas=?, prix_pizzas=?, categorie_pizzas=? WHERE code_pizzas=?");
 			resultat.setString(1, p.getCode());
 			resultat.setString(2, p.getNom());
 			resultat.setDouble(3, p.getPrix());
@@ -196,21 +194,16 @@ public class Pizzajdbc implements IPizzaDao {
 	@Override
 	public void deletePizza(String code) throws StockageException {
 
-		try {
+		try (Connection	myConnection = DriverManager.getConnection(url, login, password);
+				Statement statement = myConnection.createStatement();
+				PreparedStatement resultat = myConnection.prepareStatement("DELETE FROM Pizzas WHERE code_pizzas=?;");){
+			
 			Class.forName(drivername);
-			Connection myConnection;
-
-			myConnection = DriverManager.getConnection(url, login, password);
-			Statement statement = myConnection.createStatement();
-			PreparedStatement resultat = myConnection.prepareStatement("DELETE FROM Pizzas WHERE code_pizzas=?;");
 			resultat.setString(1, code);
 			resultat.executeUpdate();
 
 			LOG.info("pizza supprimé");
 
-			resultat.close();
-			statement.close();
-			myConnection.close();
 
 			/**
 			 * Traitement des messages d'erreurs selon leurs types
