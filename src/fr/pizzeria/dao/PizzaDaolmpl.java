@@ -1,15 +1,10 @@
 package fr.pizzeria.dao;
 
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
+
 import fr.pizzeria.exception.StockageException;
-import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 public class PizzaDaolmpl implements IPizzaDao {
@@ -18,7 +13,6 @@ public class PizzaDaolmpl implements IPizzaDao {
 
 	public PizzaDaolmpl() {
 
-		listpizza = new ArrayList();
 		listpizza.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
 		listpizza.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.POISSON));
 		listpizza.add(new Pizza("REIN", "La reine", 11.50, CategoriePizza.POISSON));

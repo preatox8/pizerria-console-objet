@@ -1,15 +1,35 @@
 package fr.pizzeria.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author ETY2
  *
  */
+
+@Entity
+@Table(name = "pizza")
 public class Pizza {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="CODEPIZZA")
 	private String code;
+	
+	@Column(name="NOMPIZZA")
 	private String nom;
+	
+	@Column(name="PRIXPIZZA")
 	private double prix;
+	
+	@Column(name="CATEGORIEPIZZA")
 	private CategoriePizza categoriepizza;
 
 	public static int compteur = 0;

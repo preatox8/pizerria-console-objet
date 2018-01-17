@@ -1,7 +1,5 @@
 package fr.pizzeria.ihm;
 
-import fr.pizzeria.exception.SavePizzaException;
-
 /**
  * @author ETY2
  *

@@ -1,19 +1,12 @@
 package fr.pizzeria.ihm;
 
-import java.util.InputMismatchException;
+
 import java.util.List;
 import java.util.Scanner;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
-import fr.pizzeria.console.PizzeriaAdminConsoleApp;
-import fr.pizzeria.dao.PizzaDaolmpl;
 import fr.pizzeria.dao.Pizzajdbc;
-import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
-import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
