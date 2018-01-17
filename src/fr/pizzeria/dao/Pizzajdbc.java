@@ -15,6 +15,8 @@ import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mysql.jdbc.MySQLConnection;
+
 import fr.pizzeria.console.PizzeriaAdminConsoleApp;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.CategoriePizza;
@@ -113,13 +115,12 @@ public class Pizzajdbc implements IPizzaDao {
 	@Override
 	public void saveNewPizza(Pizza pizza) throws StockageException {
 
-		try {
+		try(Connection myConnection = DriverManager.getConnection(url, login, password); 
+				Statement statement = myConnection.createStatement();
+				PreparedStatement resultat = myConnection.prepareStatement(
+						"INSERT INTO Pizzas(code_pizzas, nom_pizzas, prix_pizzas, categorie_pizzas) VALUES (?,?,?,?);");){
+			
 			Class.forName(drivername);
-			Connection myConnection;
-			myConnection = DriverManager.getConnection(url, login, password);
-			Statement statement = myConnection.createStatement();
-			PreparedStatement resultat = myConnection.prepareStatement(
-					"INSERT INTO Pizzas(code_pizzas, nom_pizzas, prix_pizzas, categorie_pizzas) VALUES (?,?,?,?);");
 			resultat.setString(1, pizza.getCode());
 			resultat.setString(2, pizza.getNom());
 			resultat.setDouble(3, pizza.getPrix());
@@ -143,8 +144,6 @@ public class Pizzajdbc implements IPizzaDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
-		}finally{
-			LOG.info("erreur");
 		}
 
 	}
@@ -187,8 +186,6 @@ public class Pizzajdbc implements IPizzaDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
-		}finally{
-			LOG.info("erreur");
 		}
 
 	}
@@ -225,10 +222,7 @@ public class Pizzajdbc implements IPizzaDao {
 		catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			LOG.info("erreur");
 		}
-
 	}
 
 	/**
