@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -142,6 +143,8 @@ public class Pizzajdbc implements IPizzaDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
+		}finally{
+			LOG.info("erreur");
 		}
 
 	}
@@ -184,6 +187,8 @@ public class Pizzajdbc implements IPizzaDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
+		}finally{
+			LOG.info("erreur");
 		}
 
 	}
@@ -220,6 +225,8 @@ public class Pizzajdbc implements IPizzaDao {
 		catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			LOG.info("erreur");
 		}
 
 	}
